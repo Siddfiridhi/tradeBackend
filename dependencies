@@ -1,0 +1,13 @@
+npm install -  it should be install inside front end code
+
+npm i mongoose
+
+npm i express
+
+npm i body-parser
+
+npm i cors
+
+download mongoDb and install it , and replace localhost address by your localhost address
+
+In form name should "email" for email and "answers" for all the 20 questions
