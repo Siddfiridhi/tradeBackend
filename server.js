@@ -10,7 +10,7 @@ app.use(cors());
 
 
 // MongoDB Connection
-const dbURI = process.env.MONGODB_URI; // Use the environment variable for MongoDB URI
+const dbURI = process.env.dbURI; // Use the environment variable for MongoDB URI
 if (!dbURI) {
     console.error('Error: MONGODB_URI is not defined in the environment variables.');
     process.exit(1); // Exit the application if the URI is missing
