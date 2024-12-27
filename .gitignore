@@ -1,0 +1,8 @@
+# Ignore environment variables file
+.env
+
+# Ignore package-lock.json (optional, but can be excluded in some workflows)
+package-lock.json
+
+# Node modules directory (if not already in .gitignore)
+node_modules/
