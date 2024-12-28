@@ -2,23 +2,19 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const userRoutes = require('./routes/userRoutes'); 
+const userRoutes = require('./routes/userRoutes'); // Import routes
+
 const app = express();
 
-
+// Middleware setup
 app.use(bodyParser.json());
 app.use(cors());
 
-
-<<<<<<< HEAD
-const dbURI = process.env.dbURI; 
-=======
 // MongoDB Connection
-const dbURI = process.env.dbURI; // Use the environment variable for MongoDB URI
->>>>>>> 4e78fdce29d8ec385a559324fe6024190bbcf4db
+const dbURI = process.env.dbURI; // Ensure the correct environment variable name is used
 if (!dbURI) {
     console.error('Error: MONGODB_URI is not defined in the environment variables.');
-    process.exit(1); 
+    process.exit(1); // Exit the application if the URI is missing
 }
 
 mongoose
@@ -29,15 +25,11 @@ mongoose
     .then(() => console.log('MongoDB connected'))
     .catch((err) => console.error('MongoDB connection error:', err));
 
+// Routes
+app.use('/api/users', userRoutes); // Use the user routes
 
-app.use('/api/users', userRoutes);
-
-
+// Server Setup
 const PORT = process.env.PORT || 5000;
-<<<<<<< HEAD
-=======
-
->>>>>>> 4e78fdce29d8ec385a559324fe6024190bbcf4db
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
