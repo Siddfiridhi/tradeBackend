@@ -3,39 +3,31 @@ const User = require('../models/User');
 const router = express.Router();
 
 router.post('/save', async (req, res) => {
-    const { email, answers, isForm2 } = req.body;
+    const { email, answers } = req.body;
 
+    // Check if email is provided
     if (!email) {
         return res.status(400).json({ message: 'Email is required' });
     }
 
+    // Validate answers for Form 1
+    if (!answers || answers.length !== 19) {
+        return res.status(400).json({ message: 'Answers for 19 questions are required' });
+    }
 
-    if (isForm2) {
-        try {
-            const user = new User({
-                email,
-                answers: Array(20).fill(null), 
-            });
-            await user.save();
-            res.status(200).json({ message: 'User saved successfully (Form 2)', user });
-        } catch (err) {
-            res.status(500).json({ message: 'Error saving user for Form 2', error: err.message });
-        }
-    } else {
-      
-        if (!answers || answers.length !== 19) {
-            return res.status(400).json({ message: 'Answers for 19 questions are required for Form 1' });
-        }
-        try {
-            const user = new User({
-                email,
-                answers: answers || Array(20).fill(null), 
-            });
-            await user.save();
-            res.status(200).json({ message: 'User saved successfully (Form 1)', user });
-        } catch (err) {
-            res.status(500).json({ message: 'Error saving user for Form 1', error: err.message });
-        }
+    try {
+        // Create a new user instance
+        const user = new User({
+            email,
+            answers,
+        });
+
+        // Save the user to the database
+        await user.save();
+
+        res.status(200).json({ message: 'User saved successfully', user });
+    } catch (err) {
+        res.status(501).json({ message: 'Failed retrieve form data', error: err.message });
     }
 });
 
